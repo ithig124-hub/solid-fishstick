@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guides - Hacker's Toolkit</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.cdnfonts.com/css/cabinet-grotesk" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="dark noise-overlay">
+   
+    <header class="header header-sticky">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo" onclick="window.location.href='index.hmtl'" style="cursor: pointer;"></div>
+                <div class="logo-icon">
+                    <i data-lucide="code"></i>
+                    </div>
+                    <div>
+                        <h1 class="logo-title"> Hacker's Toolkit</h1>
+                        <p class="logo-subtitle"> MADE FOR HACKCLUB</p>
+                    </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn btn-ghost btn-rounded" onclick="window.location.href='browse.html'" data-testid="back-to-browse-button">
+                    <i data-lucide="arrow-left"></i>
+                    Browse
+                </button>
+                <button class="theme-toggle" data-testid="theme-toggle-button" onclick="toggleTheme()">
+                    <i data-lucide="sun" class="theme-icon-light"></i>
+                    <i data-lucide="moon" class="theme-icon-dark"></i>
+                </button>
+            </div>
+        </div>
+    </header>
