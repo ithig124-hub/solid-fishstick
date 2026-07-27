@@ -1,0 +1,24 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --bg-light #f9fafc
+    --fg-light: #1f2d3d
+    --card-light: #ffffff;
+    --border-light: #e0e6ed;
+    --muted-light: #8492a6;
+
+     --bg-dark: #121217;
+    --fg-dark: #ffffff;
+    --card-dark: #17171d;
+    --border-dark: #2d3748;
+    --muted-dark: #8492a6;
+    
+    --hackclub-red: #ec3750;
+    --hackclub-cyan: #5bc0de;
+    --hackclub-yellow: #f1c40f;
+    --hackclub-green: #33d6a6;
+}
