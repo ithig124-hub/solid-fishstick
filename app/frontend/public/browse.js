@@ -43,4 +43,114 @@ function updateCategoryTabs() {
 }
 
 function setupDifficultyFilter() {
+    document.querySelectorAll('#difficulty-tabs .tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            selectedDifficulty = e.target.dataset.difficulty;
+            updateDifficultyTabs();
+            fetchGuides();
+        });
+    });
+}
+
+function updateDifficultyTabs() {
+    document.querySelectorAll('#difficulty-tabs .tab').forEach(tab => {
+        tab.classList.toggle('tab-active', tab.dataset.difficulty === selectedDifficulty);
+    });
+}
+
+funtion setupSearch() {
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', (e) => {
+        searchTerm = e.target.value.toLowerCase();
+        fetchGuides();
+    });
+}
+
+async function fetchGuides() {
+    try{ 
+        document.getElementById('loading').style.display = 'flex';
+        document.getElementById('guides-grid').style.display= 'none';
+        document.getElementById('empty-state').style.display = 'none';
+
+        const params = new URLSearchParams();
+        if (selectedCategory !== 'All') params.append('category', selectedCategory);
+        if (selectedDifficulty !== 'All') params.append('difficulty', selectedDifficulty);
+
+        const response = await fetch(`${API_BASE}/guides?${params}`);
+        allGuides = await response.json();
+
+        document.getElementById('loading').style.display = 'none';
+        filterAndDisplayGuides();
+    } catch (error) {
+        console.error('Error fetching guides:', error);
+        document.getElementById('loading').style.display = 'none';
+        doucment.getElementById('empty-state').style.display = 'none';
+    }
+}
+
+function filterAndDisplayGuides() {
+    let filtered = allGuides;
     
+    // Apply search filter
+    if (searchTerm) {
+        filtered = filtered.filter(guide => 
+            guide.title.toLowerCase().includes(searchTerm) ||
+            guide.description.toLowerCase().includes(searchTerm) ||
+            guide.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+        );
+    }
+    
+    displayGuides(filtered);
+}
+
+function displayGuides(guides) {
+    const container = document.getElementById('guides-grid');
+    const emptyState = document.getElementById('empty-state');
+    
+    document.getElementById('results-count').textContent = guides.length;
+    
+    if (guides.length === 0) {
+        container.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+    }
+    
+    container.style.display = 'grid';
+    emptyState.style.display = 'none';
+    
+    container.innerHTML = guides.map(guide => `
+        <div class="guide-card" data-testid="guide-card-${guide.id}" onclick="window.location.href='/guide.html?id=${guide.id}'">
+            <div class="guide-card-header">
+                <span class="guide-category">${guide.category}</span>
+                <span class="guide-time">${guide.setup_time}</span>
+            </div>
+            
+            <h3 class="guide-title">${guide.title}</h3>
+            
+            <p class="guide-description">${guide.description}</p>
+            
+            <div class="guide-footer">
+                <span class="difficulty-badge difficulty-${guide.difficulty.toLowerCase()}">
+                    ${guide.difficulty}
+                </span>
+                <span class="guide-views">${guide.views} views</span>
+            </div>
+            
+            ${guide.tags && guide.tags.length > 0 ? `
+                <div class="guide-tags">
+                    ${guide.tags.slice(0, 3).map(tag => `<span class="guide-tag">${tag}</span>`).join('')}
+                </div>
+            ` : ''}
+        </div>
+    `).join('');
+    
+    // Reinitialize lucide icons
+    lucide.createIcons();
+}
+
+// Initialize
+fetchCategories();
+setupDifficultyFilter();
+setupSearch();
+fetchGuides();
+        
