@@ -1,10 +1,10 @@
-//Theme Management
+// Theme Management
 function initTheme() {
     const savedTheme = localStorage.getItem('hackclub-theme') || 'dark';
     document.body.classList.toggle('dark', savedTheme === 'dark');
 }
 
-funtion toggleTheme () {
+function toggleTheme() {
     const isDark = document.body.classList.toggle('dark');
     localStorage.setItem('hackclub-theme', isDark ? 'dark' : 'light');
 }

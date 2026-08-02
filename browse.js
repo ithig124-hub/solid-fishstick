@@ -79,6 +79,8 @@ function loadGuides() {
 function displayGuides(guides) {
   const container = document.getElementById('guides-grid');
   const emptyState = document.getElementById('empty-state');
+  const loading = document.getElementById('loading');
+  if (loading) loading.style.display = 'none';
   document.getElementById('results-count').textContent = guides.length;
 
   if (guides.length === 0) {

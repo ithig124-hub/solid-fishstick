@@ -1,15 +1,15 @@
 // All guides data stored locally
 const GUIDES_DATA = [
-    {
-        \"id\": \"stripe-payment-integration\",
-        \"title\": \"Stripe Payment Integration\",
-        \"description\": \"Accept payments in your app with Stripe. Learn how to set up checkout sessions and handle webhooks.\",
-        \"category\": \"Payments\",
-        \"difficulty\": \"Intermediate\",
-        \"setup_time\": \"30 minutes\",
-        \"tags\": [\"stripe\", \"payments\", \"checkout\", \"webhooks\"],
-        \"api_keys_needed\": [\"Stripe Secret Key\", \"Stripe Publishable Key\"],
-        \"content\": \"# Stripe Payment Integration
+  {
+    id: "stripe-payment-integration",
+    title: "Stripe Payment Integration",
+    description: "Accept payments in your app with Stripe. Learn how to set up checkout sessions and handle webhooks.",
+    category: "Payments",
+    difficulty: "Intermediate",
+    setup_time: "30 minutes",
+    tags: ["stripe", "payments", "checkout", "webhooks"],
+    api_keys_needed: ["Stripe Secret Key", "Stripe Publishable Key"],
+    content: `# Stripe Payment Integration
 
 ## Overview
 Stripe is the most popular payment processor for developers. This guide will help you integrate Stripe Checkout into your application.
@@ -19,12 +19,8 @@ Stripe is the most popular payment processor for developers. This guide will hel
 - Basic understanding of REST APIs
 
 ## Step 1: Install Stripe SDK
-
-For Python:
-pip install stripe
-
-For JavaScript:
-npm install @stripe/stripe-js
+For Python: pip install stripe
+For JavaScript: npm install @stripe/stripe-js
 
 ## Step 2: Get Your API Keys
 1. Go to Stripe Dashboard
@@ -38,23 +34,46 @@ Create a backend endpoint that initializes a Stripe checkout session using your 
 Use the session ID to redirect users to Stripe's hosted checkout page.
 
 ## Common Pitfalls
-- Don't expose your Secret Key - keep it on backend only
+- Don't expose your Secret Key — keep it on backend only
 - Always verify webhook signatures
-- Test with test mode first before going live\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"openai-gpt-integration\",
-        \"title\": \"OpenAI GPT Integration\",
-        \"description\": \"Add AI-powered text generation to your app using OpenAI's GPT models.\",
-        \"category\": \"AI Integration\",
-        \"difficulty\": \"Beginner\",
-        \"setup_time\": \"15 minutes\",
-        \"tags\": [\"openai\", \"gpt\", \"ai\", \"chatbot\"],
-        \"api_keys_needed\": [\"OpenAI API Key\"],
-        \"content\": \"# OpenAI GPT Integration
+- Test with test mode first before going live`,
+    code_snippets: [
+      {
+        language: "python",
+        filename: "server.py",
+        code: `import stripe
+stripe.api_key = "sk_test_..."
+
+session = stripe.checkout.Session.create(
+    payment_method_types=["card"],
+    line_items=[{
+        "price_data": {
+            "currency": "usd",
+            "product_data": {"name": "T-shirt"},
+            "unit_amount": 2000,
+        },
+        "quantity": 1,
+    }],
+    mode="payment",
+    success_url="https://example.com/success",
+    cancel_url="https://example.com/cancel",
+)
+print(session.url)`
+      }
+    ],
+    views: 1240,
+    helpful_votes: 89
+  },
+  {
+    id: "openai-gpt-integration",
+    title: "OpenAI GPT Integration",
+    description: "Add AI-powered text generation to your app using OpenAI's GPT models.",
+    category: "AI Integration",
+    difficulty: "Beginner",
+    setup_time: "15 minutes",
+    tags: ["openai", "gpt", "ai", "chatbot"],
+    api_keys_needed: ["OpenAI API Key"],
+    content: `# OpenAI GPT Integration
 
 ## Overview
 Integrate powerful AI language models into your application with OpenAI's API.
@@ -78,21 +97,34 @@ Node.js: npm install openai
 - Chatbots and virtual assistants
 - Content generation
 - Code assistance
-- Summarization\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"vercel-deployment\",
-        \"title\": \"Deploy to Vercel\",
-        \"description\": \"Deploy your web app to Vercel with automatic HTTPS, CDN, and zero configuration.\",
-        \"category\": \"Deployment\",
-        \"difficulty\": \"Beginner\",
-        \"setup_time\": \"10 minutes\",
-        \"tags\": [\"vercel\", \"deployment\", \"hosting\", \"ci-cd\"],
-        \"api_keys_needed\": [],
-        \"content\": \"# Deploy to Vercel
+- Summarization`,
+    code_snippets: [
+      {
+        language: "python",
+        filename: "chat.py",
+        code: `from openai import OpenAI
+client = OpenAI(api_key="YOUR_KEY")
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": "Say hi to Hack Club!"}]
+)
+print(response.choices[0].message.content)`
+      }
+    ],
+    views: 2100,
+    helpful_votes: 156
+  },
+  {
+    id: "vercel-deployment",
+    title: "Deploy to Vercel",
+    description: "Deploy your web app to Vercel with automatic HTTPS, CDN, and zero configuration.",
+    category: "Deployment",
+    difficulty: "Beginner",
+    setup_time: "10 minutes",
+    tags: ["vercel", "deployment", "hosting", "ci-cd"],
+    api_keys_needed: [],
+    content: `# Deploy to Vercel
 
 ## Overview
 Vercel offers the easiest way to deploy modern web applications with instant deployments.
@@ -115,21 +147,29 @@ Navigate to your project and run: vercel
 1. Go to project settings
 2. Navigate to Domains
 3. Add custom domain
-4. Update DNS settings\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"firebase-auth\",
-        \"title\": \"Firebase Authentication\",
-        \"description\": \"Add secure user authentication with email/password, Google, and social login providers.\",
-        \"category\": \"Authentication\",
-        \"difficulty\": \"Intermediate\",
-        \"setup_time\": \"25 minutes\",
-        \"tags\": [\"firebase\", \"auth\", \"login\", \"oauth\"],
-        \"api_keys_needed\": [\"Firebase Config Object\"],
-        \"content\": \"# Firebase Authentication
+4. Update DNS settings`,
+    code_snippets: [
+      {
+        language: "bash",
+        filename: "terminal",
+        code: `npm install -g vercel
+vercel login
+vercel --prod`
+      }
+    ],
+    views: 890,
+    helpful_votes: 72
+  },
+  {
+    id: "firebase-auth",
+    title: "Firebase Authentication",
+    description: "Add secure user authentication with email/password, Google, and social login providers.",
+    category: "Authentication",
+    difficulty: "Intermediate",
+    setup_time: "25 minutes",
+    tags: ["firebase", "auth", "login", "oauth"],
+    api_keys_needed: ["Firebase Config Object"],
+    content: `# Firebase Authentication
 
 ## Overview
 Firebase Authentication provides backend services to authenticate users.
@@ -152,21 +192,35 @@ npm install firebase
 - Google Sign-In
 - Phone authentication
 - Password reset
-- Email verification\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"mongodb-setup\",
-        \"title\": \"MongoDB Database Setup\",
-        \"description\": \"Set up MongoDB for your application with best practices for schema design and queries.\",
-        \"category\": \"Storage & Databases\",
-        \"difficulty\": \"Beginner\",
-        \"setup_time\": \"20 minutes\",
-        \"tags\": [\"mongodb\", \"database\", \"nosql\"],
-        \"api_keys_needed\": [\"MongoDB Connection String\"],
-        \"content\": \"# MongoDB Database Setup
+- Email verification`,
+    code_snippets: [
+      {
+        language: "javascript",
+        filename: "auth.js",
+        code: `import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const app = initializeApp({ /* your config */ });
+const auth = getAuth(app);
+
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCred) => console.log("Signed in:", userCred.user.uid))
+  .catch((err) => console.error(err));`
+      }
+    ],
+    views: 1650,
+    helpful_votes: 121
+  },
+  {
+    id: "mongodb-setup",
+    title: "MongoDB Database Setup",
+    description: "Set up MongoDB for your application with best practices for schema design and queries.",
+    category: "Storage & Databases",
+    difficulty: "Beginner",
+    setup_time: "20 minutes",
+    tags: ["mongodb", "database", "nosql"],
+    api_keys_needed: ["MongoDB Connection String"],
+    content: `# MongoDB Database Setup
 
 ## Overview
 MongoDB is a popular NoSQL database perfect for modern applications.
@@ -193,21 +247,34 @@ MongoDB is a popular NoSQL database perfect for modern applications.
 ## Best Practices
 - Use indexes for frequently queried fields
 - Don't embed documents deeper than 3 levels
-- Implement proper error handling\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"sendgrid-email\",
-        \"title\": \"SendGrid Email Integration\",
-        \"description\": \"Send transactional and marketing emails with SendGrid's reliable email API.\",
-        \"category\": \"Email/SMS\",
-        \"difficulty\": \"Beginner\",
-        \"setup_time\": \"15 minutes\",
-        \"tags\": [\"sendgrid\", \"email\", \"transactional\"],
-        \"api_keys_needed\": [\"SendGrid API Key\"],
-        \"content\": \"# SendGrid Email Integration
+- Implement proper error handling`,
+    code_snippets: [
+      {
+        language: "python",
+        filename: "db.py",
+        code: `from pymongo import MongoClient
+
+client = MongoClient("mongodb+srv://user:pass@cluster.mongodb.net")
+db = client["hackclub"]
+users = db["users"]
+
+users.insert_one({"name": "Ada", "score": 100})
+print(users.find_one({"name": "Ada"}))`
+      }
+    ],
+    views: 980,
+    helpful_votes: 68
+  },
+  {
+    id: "sendgrid-email",
+    title: "SendGrid Email Integration",
+    description: "Send transactional and marketing emails with SendGrid's reliable email API.",
+    category: "Email/SMS",
+    difficulty: "Beginner",
+    setup_time: "15 minutes",
+    tags: ["sendgrid", "email", "transactional"],
+    api_keys_needed: ["SendGrid API Key"],
+    content: `# SendGrid Email Integration
 
 ## Overview
 SendGrid makes it easy to send emails from your application.
@@ -230,21 +297,33 @@ SendGrid makes it easy to send emails from your application.
 - Welcome emails
 - Password resets
 - Order confirmations
-- Newsletters\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"twilio-sms\",
-        \"title\": \"Twilio SMS Integration\",
-        \"description\": \"Send SMS notifications and verification codes using Twilio's messaging API.\",
-        \"category\": \"Email/SMS\",
-        \"difficulty\": \"Beginner\",
-        \"setup_time\": \"20 minutes\",
-        \"tags\": [\"twilio\", \"sms\", \"notifications\"],
-        \"api_keys_needed\": [\"Twilio Account SID\", \"Twilio Auth Token\", \"Twilio Phone Number\"],
-        \"content\": \"# Twilio SMS Integration
+- Newsletters`,
+    code_snippets: [
+      {
+        language: "python",
+        filename: "email.py",
+        code: `import sendgrid
+from sendgrid.helpers.mail import Mail
+
+sg = sendgrid.SendGridAPIClient(api_key="YOUR_KEY")
+msg = Mail(from_email="you@example.com", to_emails="user@example.com",
+           subject="Hi", html_content="<b>Welcome!</b>")
+sg.send(msg)`
+      }
+    ],
+    views: 720,
+    helpful_votes: 54
+  },
+  {
+    id: "twilio-sms",
+    title: "Twilio SMS Integration",
+    description: "Send SMS notifications and verification codes using Twilio's messaging API.",
+    category: "Email/SMS",
+    difficulty: "Beginner",
+    setup_time: "20 minutes",
+    tags: ["twilio", "sms", "notifications"],
+    api_keys_needed: ["Twilio Account SID", "Twilio Auth Token", "Twilio Phone Number"],
+    content: `# Twilio SMS Integration
 
 ## Overview
 Twilio provides a simple API for sending SMS messages.
@@ -267,21 +346,34 @@ Twilio provides a simple API for sending SMS messages.
 - Two-factor authentication
 - Order notifications
 - Appointment reminders
-- Verification codes\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"railway-deployment\",
-        \"title\": \"Deploy to Railway\",
-        \"description\": \"Deploy full-stack applications with databases on Railway with automatic deployments.\",
-        \"category\": \"Deployment\",
-        \"difficulty\": \"Beginner\",
-        \"setup_time\": \"15 minutes\",
-        \"tags\": [\"railway\", \"deployment\", \"postgres\", \"docker\"],
-        \"api_keys_needed\": [],
-        \"content\": \"# Deploy to Railway
+- Verification codes`,
+    code_snippets: [
+      {
+        language: "python",
+        filename: "sms.py",
+        code: `from twilio.rest import Client
+
+client = Client("ACxxx", "your_token")
+client.messages.create(
+    body="Your code is 123456",
+    from_="+15551234567",
+    to="+15557654321"
+)`
+      }
+    ],
+    views: 640,
+    helpful_votes: 47
+  },
+  {
+    id: "railway-deployment",
+    title: "Deploy to Railway",
+    description: "Deploy full-stack applications with databases on Railway with automatic deployments.",
+    category: "Deployment",
+    difficulty: "Beginner",
+    setup_time: "15 minutes",
+    tags: ["railway", "deployment", "postgres", "docker"],
+    api_keys_needed: [],
+    content: `# Deploy to Railway
 
 ## Overview
 Railway makes it easy to deploy full-stack applications with built-in database support.
@@ -304,21 +396,21 @@ Railway makes it easy to deploy full-stack applications with built-in database s
 - Automatic deployments on git push
 - Built-in databases
 - Custom domains
-- Environment variables\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"jwt-authentication\",
-        \"title\": \"JWT Authentication\",
-        \"description\": \"Implement secure token-based authentication using JSON Web Tokens.\",
-        \"category\": \"Authentication\",
-        \"difficulty\": \"Intermediate\",
-        \"setup_time\": \"30 minutes\",
-        \"tags\": [\"jwt\", \"auth\", \"security\", \"tokens\"],
-        \"api_keys_needed\": [],
-        \"content\": \"# JWT Authentication
+- Environment variables`,
+    code_snippets: [],
+    views: 510,
+    helpful_votes: 38
+  },
+  {
+    id: "jwt-authentication",
+    title: "JWT Authentication",
+    description: "Implement secure token-based authentication using JSON Web Tokens.",
+    category: "Authentication",
+    difficulty: "Intermediate",
+    setup_time: "30 minutes",
+    tags: ["jwt", "auth", "security", "tokens"],
+    api_keys_needed: [],
+    content: `# JWT Authentication
 
 ## Overview
 JSON Web Tokens provide stateless authentication for modern applications.
@@ -340,21 +432,39 @@ JSON Web Tokens provide stateless authentication for modern applications.
 - Set short expiration times
 - Implement refresh tokens
 - Store tokens securely
-- Use strong secret keys\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"claude-ai-integration\",
-        \"title\": \"Anthropic Claude AI Integration\",
-        \"description\": \"Integrate Claude AI for advanced conversational AI and text analysis.\",
-        \"category\": \"AI Integration\",
-        \"difficulty\": \"Beginner\",
-        \"setup_time\": \"15 minutes\",
-        \"tags\": [\"claude\", \"anthropic\", \"ai\", \"llm\"],
-        \"api_keys_needed\": [\"Anthropic API Key\"],
-        \"content\": \"# Anthropic Claude AI Integration
+- Use strong secret keys`,
+    code_snippets: [
+      {
+        language: "python",
+        filename: "auth.py",
+        code: `import jwt, datetime
+
+SECRET = "super-secret-key"
+
+def create_token(user_id):
+    payload = {
+        "sub": user_id,
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1),
+    }
+    return jwt.encode(payload, SECRET, algorithm="HS256")
+
+def verify_token(token):
+    return jwt.decode(token, SECRET, algorithms=["HS256"])`
+      }
+    ],
+    views: 1120,
+    helpful_votes: 84
+  },
+  {
+    id: "claude-ai-integration",
+    title: "Anthropic Claude AI Integration",
+    description: "Integrate Claude AI for advanced conversational AI and text analysis.",
+    category: "AI Integration",
+    difficulty: "Beginner",
+    setup_time: "15 minutes",
+    tags: ["claude", "anthropic", "ai", "llm"],
+    api_keys_needed: ["Anthropic API Key"],
+    content: `# Anthropic Claude AI Integration
 
 ## Overview
 Claude is Anthropic's AI assistant, known for being helpful, harmless, and honest.
@@ -378,21 +488,35 @@ Node.js: npm install @anthropic-ai/sdk
 - Complex reasoning tasks
 - Long document analysis
 - Code review
-- Research assistance\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"razorpay-integration\",
-        \"title\": \"Razorpay Payment Integration\",
-        \"description\": \"Accept payments in India with Razorpay. Perfect for Indian startups.\",
-        \"category\": \"Payments\",
-        \"difficulty\": \"Intermediate\",
-        \"setup_time\": \"25 minutes\",
-        \"tags\": [\"razorpay\", \"payments\", \"india\", \"upi\"],
-        \"api_keys_needed\": [\"Razorpay Key ID\", \"Razorpay Key Secret\"],
-        \"content\": \"# Razorpay Payment Integration
+- Research assistance`,
+    code_snippets: [
+      {
+        language: "python",
+        filename: "claude.py",
+        code: `import anthropic
+
+client = anthropic.Anthropic(api_key="YOUR_KEY")
+msg = client.messages.create(
+    model="claude-3-5-sonnet-latest",
+    max_tokens=512,
+    messages=[{"role": "user", "content": "Explain JWT in 3 lines."}]
+)
+print(msg.content[0].text)`
+      }
+    ],
+    views: 1780,
+    helpful_votes: 133
+  },
+  {
+    id: "razorpay-integration",
+    title: "Razorpay Payment Integration",
+    description: "Accept payments in India with Razorpay. Perfect for Indian startups.",
+    category: "Payments",
+    difficulty: "Intermediate",
+    setup_time: "25 minutes",
+    tags: ["razorpay", "payments", "india", "upi"],
+    api_keys_needed: ["Razorpay Key ID", "Razorpay Key Secret"],
+    content: `# Razorpay Payment Integration
 
 ## Overview
 Razorpay is India's leading payment gateway supporting UPI, cards, wallets.
@@ -416,21 +540,21 @@ Razorpay is India's leading payment gateway supporting UPI, cards, wallets.
 - Instant refunds
 - Subscription billing
 - Payment links
-- QR codes\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"gemini-image-generation\",
-        \"title\": \"Google Gemini Image Generation\",
-        \"description\": \"Generate images with Google's Gemini Nano Banana model.\",
-        \"category\": \"Image Generation\",
-        \"difficulty\": \"Intermediate\",
-        \"setup_time\": \"20 minutes\",
-        \"tags\": [\"gemini\", \"image-generation\", \"ai\", \"google\"],
-        \"api_keys_needed\": [\"Google AI API Key\"],
-        \"content\": \"# Google Gemini Image Generation
+- QR codes`,
+    code_snippets: [],
+    views: 430,
+    helpful_votes: 29
+  },
+  {
+    id: "gemini-image-generation",
+    title: "Google Gemini Image Generation",
+    description: "Generate images with Google's Gemini Nano Banana model.",
+    category: "Image Generation",
+    difficulty: "Intermediate",
+    setup_time: "20 minutes",
+    tags: ["gemini", "image-generation", "ai", "google"],
+    api_keys_needed: ["Google AI API Key"],
+    content: `# Google Gemini Image Generation
 
 ## Overview
 Generate stunning images using Google's Gemini Nano Banana model.
@@ -454,21 +578,21 @@ Node.js: npm install @google/generative-ai
 - Product mockups
 - Social media graphics
 - Blog illustrations
-- Concept art\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"postgresql-setup\",
-        \"title\": \"PostgreSQL Database Setup\",
-        \"description\": \"Set up PostgreSQL for robust relational data with ACID compliance.\",
-        \"category\": \"Storage & Databases\",
-        \"difficulty\": \"Intermediate\",
-        \"setup_time\": \"25 minutes\",
-        \"tags\": [\"postgresql\", \"sql\", \"database\", \"relational\"],
-        \"api_keys_needed\": [],
-        \"content\": \"# PostgreSQL Database Setup
+- Concept art`,
+    code_snippets: [],
+    views: 860,
+    helpful_votes: 62
+  },
+  {
+    id: "postgresql-setup",
+    title: "PostgreSQL Database Setup",
+    description: "Set up PostgreSQL for robust relational data with ACID compliance.",
+    category: "Storage & Databases",
+    difficulty: "Intermediate",
+    setup_time: "25 minutes",
+    tags: ["postgresql", "sql", "database", "relational"],
+    api_keys_needed: [],
+    content: `# PostgreSQL Database Setup
 
 ## Overview
 PostgreSQL is a powerful open-source relational database.
@@ -493,21 +617,21 @@ CREATE TABLE users (
 - Use indexes on queried columns
 - Implement foreign keys
 - Use transactions
-- Regular backups\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    },
-    {
-        \"id\": \"resend-email\",
-        \"title\": \"Resend Email Integration\",
-        \"description\": \"Modern email API built for developers. Send emails with React components.\",
-        \"category\": \"Email/SMS\",
-        \"difficulty\": \"Beginner\",
-        \"setup_time\": \"10 minutes\",
-        \"tags\": [\"resend\", \"email\", \"react\", \"transactional\"],
-        \"api_keys_needed\": [\"Resend API Key\"],
-        \"content\": \"# Resend Email Integration
+- Regular backups`,
+    code_snippets: [],
+    views: 690,
+    helpful_votes: 51
+  },
+  {
+    id: "resend-email",
+    title: "Resend Email Integration",
+    description: "Modern email API built for developers. Send emails with React components.",
+    category: "Email/SMS",
+    difficulty: "Beginner",
+    setup_time: "10 minutes",
+    tags: ["resend", "email", "react", "transactional"],
+    api_keys_needed: ["Resend API Key"],
+    content: `# Resend Email Integration
 
 ## Overview
 Resend is a modern email API with React email templates.
@@ -531,104 +655,88 @@ For production:
 - React email templates
 - Built-in testing
 - Great deliverability
-- Developer-friendly API\",
-        \"code_snippets\": [],
-        \"views\": 0,
-        \"helpful_votes\": 0
-    }
+- Developer-friendly API`,
+    code_snippets: [],
+    views: 380,
+    helpful_votes: 26
+  }
 ];
 
-// Store view counts and votes in localStorage
+// LocalStorage stats (extra views/votes cast in this browser)
 function getLocalStats() {
-    const stored = localStorage.getItem('guidesStats');
-    return stored ? JSON.parse(stored) : {};
+  try {
+    return JSON.parse(localStorage.getItem('guidesStats') || '{}');
+  } catch (e) {
+    return {};
+  }
 }
 
 function saveLocalStats(stats) {
-    localStorage.setItem('guidesStats', JSON.stringify(stats));
+  localStorage.setItem('guidesStats', JSON.stringify(stats));
 }
 
 function incrementView(guideId) {
-    const stats = getLocalStats();
-    if (!stats[guideId]) {
-        stats[guideId] = { views: 0, helpful_votes: 0 };
-    }
-    stats[guideId].views++;
-    saveLocalStats(stats);
+  const stats = getLocalStats();
+  if (!stats[guideId]) stats[guideId] = { views: 0, helpful_votes: 0 };
+  stats[guideId].views++;
+  saveLocalStats(stats);
 }
 
 function incrementHelpful(guideId) {
-    const stats = getLocalStats();
-    if (!stats[guideId]) {
-        stats[guideId] = { views: 0, helpful_votes: 0 };
-    }
-    stats[guideId].helpful_votes++;
-    saveLocalStats(stats);
+  const stats = getLocalStats();
+  if (!stats[guideId]) stats[guideId] = { views: 0, helpful_votes: 0 };
+  stats[guideId].helpful_votes++;
+  saveLocalStats(stats);
 }
 
 function getGuideStats(guideId) {
-    const stats = getLocalStats();
-    return stats[guideId] || { views: 0, helpful_votes: 0 };
+  const stats = getLocalStats();
+  return stats[guideId] || { views: 0, helpful_votes: 0 };
 }
 
-// Get all guides with stats
 function getAllGuides() {
-    const stats = getLocalStats();
-    return GUIDES_DATA.map(guide => {
-        const guideStats = stats[guide.id] || { views: 0, helpful_votes: 0 };
-        return {
-            ...guide,
-            views: guideStats.views,
-            helpful_votes: guideStats.helpful_votes
-        };
-    });
+  const stats = getLocalStats();
+  return GUIDES_DATA.map(guide => {
+    const s = stats[guide.id] || { views: 0, helpful_votes: 0 };
+    return {
+      ...guide,
+      views: guide.views + s.views,
+      helpful_votes: guide.helpful_votes + s.helpful_votes
+    };
+  });
 }
 
-// Get guide by ID
 function getGuideById(id) {
-    const guide = GUIDES_DATA.find(g => g.id === id);
-    if (!guide) return null;
-    
-    const stats = getGuideStats(id);
-    return {
-        ...guide,
-        views: stats.views,
-        helpful_votes: stats.helpful_votes
-    };
+  const guide = GUIDES_DATA.find(g => g.id === id);
+  if (!guide) return null;
+  const s = getGuideStats(id);
+  return {
+    ...guide,
+    views: guide.views + s.views,
+    helpful_votes: guide.helpful_votes + s.helpful_votes
+  };
 }
 
-// Get categories
 function getCategories() {
-    const categoryCounts = {};
-    GUIDES_DATA.forEach(guide => {
-        categoryCounts[guide.category] = (categoryCounts[guide.category] || 0) + 1;
-    });
-    
-    return Object.entries(categoryCounts).map(([name, count]) => ({
-        name,
-        count
-    }));
+  const counts = {};
+  GUIDES_DATA.forEach(g => { counts[g.category] = (counts[g.category] || 0) + 1; });
+  return Object.entries(counts).map(([name, count]) => ({ name, count }));
 }
 
-// Get stats
 function getStats() {
-    const guides = getAllGuides();
-    const totalViews = guides.reduce((sum, g) => sum + g.views, 0);
-    const popular = guides.sort((a, b) => b.views - a.views).slice(0, 5);
-    
-    return {
-        total_guides: guides.length,
-        total_views: totalViews,
-        popular_guides: popular
-    };
+  const guides = getAllGuides();
+  return {
+    total_guides: guides.length,
+    total_views: guides.reduce((sum, g) => sum + g.views, 0),
+    popular_guides: [...guides].sort((a, b) => b.views - a.views).slice(0, 5)
+  };
 }
 
-// Export for use in other files
 window.GuidesDB = {
-    getAllGuides,
-    getGuideById,
-    getCategories,
-    getStats,
-    incrementView,
-    incrementHelpful
+  getAllGuides,
+  getGuideById,
+  getCategories,
+  getStats,
+  incrementView,
+  incrementHelpful
 };
