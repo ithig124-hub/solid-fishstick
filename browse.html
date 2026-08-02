@@ -1,99 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Browse Guides - Hacker's Toolkit</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.cdnfonts.com/css/cabinet-grotesk" rel="stylesheet">
-    
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <link rel="stylesheet" href="/styles.css" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Browse Guides - Hacker's Toolkit</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/cabinet-grotesk" rel="stylesheet" />
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="dark noise-overlay">
-
-<header class="header header-sticky">
+  <header class="header header-sticky">
     <div class="header-content">
-        <div class="header-left">
-            <div class="logo-icon">
-                <i data-lucide="code"></i>
-            </div>
+      <div class="header-left">
+        <div class="logo-icon">
+          <i data-lucide="code"></i>
         </div>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-ghost btn-rounded" onclick="window.location.href='index.html'" data-testid="back-to-home-button">
+          <i data-lucide="arrow-left"></i>
+          Home
+        </button>
+        <button class="theme-toggle" data-testid="theme-toggle-button" onclick="toggleTheme()">
+          <i data-lucide="sun" class="theme-icon-light"></i>
+          <i data-lucide="moon" class="theme-icon-dark"></i>
+        </button>
+      </div>
     </div>
-    <div class="header-right">
-        <button class="btn btn-ghost btn-rounded" onclick="window.location.href='/index.html'" data-testid="back-to-home-button">
-                    <i data-lucide="arrow-left"></i>
-                    Home
-                </button>
-                <button class="theme-toggle" data-testid="theme-toggle-button" onclick="toggleTheme()">
-                    <i data-lucide="sun" class="theme-icon-light"></i>
-                    <i data-lucide="moon" class="theme-icon-dark"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-    <div class="browse-container">
-        <!--search bar ig-->
-        <div class="search-container">
-            <div class="search-wrapper">
-                <i data-lucide="search" class="search-icon"></i>
-                <input
-                 type="text"
-                 id="search-imput"
-                 data-testid="search-input"
-                 placeholder="Search guides, tags, or keywords..."
-                 class="search-input"
-                />
-            </div>
-        </div>
+  </header>
 
-        <div class="filter-container">
-            <div class="filter-group">
-                <label class="filter-label">CATEGORY</label>
-                <div  id="category-tabs" class="tabs">
-                </div>
-            </div>
-            
-            <div class="filter-group">
-                <label class="filter-label">DIFFICULTY</label>
-                <div id="difficulty-tabs" class="tabs">
-                    <button class="tab tab-active" data-difficulty="All" data-testid="difficulty-all">All</button>
-                    <button class="tab" data-difficulty="Beginner" data-testid="difficulty-beginner">Beginner</button>
-                    <button class="tab" data-difficulty="Intermediate" data-testid="difficulty-intermediate">Intermediate</button>
-                    <button class="tab" data-difficulty="Advanced" data-testid="difficulty-advanced">Advanced</button>
-                </div>
-            </div>
-        </div>
-
-
-        
-
-        <div class="results-count">
-            <p><span id="results-count">0</span> guides found</p>
-            
-        </div>
-        <div id="loading" class="loading">
-            <div class="spinner"></div>
-        </div>
-        
-        <div id="guides-grid" class="guides-grid guides-grid-browse">
-            <!--Guides should load here i think-->
-        </div>
-
-             <!-- Empty State -->
-        <div id="empty-state" class="empty-state" style="display: none;">
-            <p>No guides found. Try adjusting your filters.</p>
-        </div>
+  <div class="browse-container">
+    <!-- Search -->
+    <div class="search-container">
+      <div class="search-wrapper">
+        <i data-lucide="search" class="search-icon"></i>
+        <input
+          type="text"
+          id="search-input"
+          data-testid="search-input"
+          placeholder="Search guides, tags, or keywords..."
+          class="search-input"
+        />
+      </div>
     </div>
 
-            
-    
+    <!-- Filters -->
+    <div class="filter-container">
+      <div class="filter-group">
+        <label class="filter-label">CATEGORY</label>
+        <div id="category-tabs" class="tabs"></div>
+      </div>
 
+      <div class="filter-group">
+        <label class="filter-label">DIFFICULTY</label>
+        <div id="difficulty-tabs" class="tabs">
+          <button class="tab tab-active" data-difficulty="All" data-testid="difficulty-all">All</button>
+          <button class="tab" data-difficulty="Beginner" data-testid="difficulty-beginner">Beginner</button>
+          <button class="tab" data-difficulty="Intermediate" data-testid="difficulty-intermediate">Intermediate</button>
+          <button class="tab" data-difficulty="Advanced" data-testid="difficulty-advanced">Advanced</button>
+        </div>
+      </div>
+    </div>
 
-                
+    <!-- Results count -->
+    <div class="results-count">
+      <p><span id="results-count">0</span> guides found</p>
+    </div>
 
-        
+    <!-- Loading spinner -->
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Guides grid -->
+    <div id="guides-grid" class="guides-grid guides-grid-browse"></div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="empty-state" style="display: none;">
+      <p>No guides found. Try adjusting your filters.</p>
+    </div>
+  </div>
+
+  <!-- Scripts: order matters — data must load before browse.js -->
+  <script src="theme.js"></script>
+  <script src="guides-data.js"></script>
+  <script src="browse.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
